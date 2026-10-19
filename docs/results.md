@@ -10,7 +10,7 @@ values are percentages; changes are percentage points.
 
 Table 1 evaluates four backbones on DCASE 2020 Task 1A and DCASE 2024 split100.
 The complete per-backbone seen, unseen and overall statistics are in
-[`paper_results.csv`](../benchmarks/paper_results.csv) and the project README.
+[`paper_results.csv`](../benchmarks/paper_results.csv).
 
 | Protocol | Seen · Base / +AF | Unseen · Base / +AF | Overall · Base / +AF |
 | :--- | ---: | ---: | ---: |
@@ -72,6 +72,10 @@ both have permutation-test p-values below 0.005. Figure 3 reports mean off-diago
 cosine similarity of scene-dependent device-shift directions increasing from 0.273
 to 0.362. These are diagnostics of scene-device geometry, not accuracy metrics.
 
+![Cross-scene cosine similarity of device-shift directions](figures/device-shifts.png)
+
+*Figure 3 from the paper. Baseline (left) and AnchorFlow (right).*
+
 Table 3(b), user-disjoint CochlScene with six observed and three held-out MicIRP
 responses:
 
@@ -80,8 +84,6 @@ responses:
 | Baseline | 76.13 ± 0.35 | 65.22 ± 0.60 | 72.49 ± 0.40 |
 | **AnchorFlow** | **77.96 ± 0.39** | **68.44 ± 0.56** | **74.79 ± 0.38** |
 
-## Reading the figures
-
-The hero and architecture illustrations are schematics. The gain chart is generated
-from the manuscript table values. Run `python tools/build_assets.py` to regenerate
-the repository SVG assets after editing the structured tables.
+The figure files used in this repository are the original images included by the
+paper's LaTeX source. Their source filenames are listed in
+[`figures/README.md`](figures/README.md).

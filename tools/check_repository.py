@@ -1,8 +1,7 @@
-"""Check local documentation links, SVG structure, and manuscript table schemas."""
+"""Check local documentation links, paper figures, and manuscript table schemas."""
 
 import csv
 import re
-import xml.etree.ElementTree as ET
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -21,10 +20,10 @@ def main():
             if not (path.parent / target).exists():
                 raise FileNotFoundError(f"{path.relative_to(ROOT)} -> {target}")
             checked += 1
-    for path in (ROOT / "docs" / "assets").glob("*.svg"):
-        root = ET.parse(path).getroot()
-        if root.tag != "{http://www.w3.org/2000/svg}svg":
-            raise ValueError(f"invalid SVG root: {path}")
+    for name in ("method.png", "device-shifts.png", "motivation.png"):
+        path = ROOT / "docs" / "figures" / name
+        if path.read_bytes()[:8] != b"\x89PNG\r\n\x1a\n":
+            raise ValueError(f"invalid paper figure: {path}")
     with (ROOT / "benchmarks" / "paper_results.csv").open(newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     if len(rows) != 8:
@@ -33,7 +32,7 @@ def main():
         for key, value in row.items():
             if key not in ("protocol", "backbone") and not 0 <= float(value) <= 100:
                 raise ValueError(f"invalid manuscript statistic: {key}")
-    print(f"Checked {checked} local links, SVG structure and manuscript Table 1 schema")
+    print(f"Checked {checked} local links, paper figures and manuscript Table 1 schema")
 
 
 if __name__ == "__main__":

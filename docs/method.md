@@ -6,6 +6,15 @@ AnchorFlow splits an acoustic scene classifier into a selected representation
 $h=f_\theta(x)$ and the remaining predictor $g_\phi(h)$. The original training
 objective remains $\mathcal{L}_{\mathrm{base}}$.
 
+The motivation is that device effects depend on the acoustic scene:
+
+<p align="center">
+  <img src="figures/motivation.png" alt="Scene-conditioned device effects in park and metro-station recordings" width="560" />
+</p>
+
+*Figure 1 from the paper. A device change affects scene-relevant cues differently
+across scenes.*
+
 ## 1. Joint scene-device anchors
 
 Each observed cell $(y,d)$ has a diagonal-Gaussian approximation:
