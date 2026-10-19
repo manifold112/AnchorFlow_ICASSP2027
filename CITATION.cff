@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "For the research method, please cite the manuscript below."
+title: "AnchorFlow: Scene-Conditioned Device Flow Modeling"
+type: software
+version: 0.1.0
+license: MIT
+authors:
+  - family-names: Zhang
+    given-names: Peihong
+  - family-names: Liu
+    given-names: Yuxuan
+  - family-names: Cai
+    given-names: Yiqiang
+  - family-names: Tan
+    given-names: Yizhou
+  - family-names: Li
+    given-names: Shengchen
+preferred-citation:
+  type: generic
+  title: "Beyond Device Invariance: Scene-Conditioned Device Flow Modeling for Cross-Device Acoustic Scene Classification"
+  authors:
+    - family-names: Zhang
+      given-names: Peihong
+    - family-names: Liu
+      given-names: Yuxuan
+    - family-names: Cai
+      given-names: Yiqiang
+    - family-names: Tan
+      given-names: Yizhou
+    - family-names: Li
+      given-names: Shengchen
+  notes: "Research manuscript accompanying this repository."
