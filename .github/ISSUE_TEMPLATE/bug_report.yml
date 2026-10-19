@@ -1,0 +1,17 @@
+name: Bug report
+description: Report an issue with device flows, data handling, or training integration.
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include the expected behavior and a minimal example.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Configuration and environment
+      description: Python, PyTorch, device, backbone split point, and AnchorFlow parameters.
+  - type: textarea
+    attributes:
+      label: Traceback or diagnostics
+      render: text

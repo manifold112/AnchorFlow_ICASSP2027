@@ -1,0 +1,24 @@
+# AnchorFlow parameters follow the manuscript, Section 3.1.
+# Optimizer and front-end parameters are configurable experiment choices.
+model:
+  factory: anchorflow.models:CompactASC
+  kwargs:
+    feature_dim: 128
+
+anchorflow:
+  weight: 0.3
+  delta: 0.20
+  targets_per_sample: 1
+  ema_decay: 0.99
+  min_samples: 32
+  variance_floor: 0.000001
+  epsilon: 0.00001
+  warmup_epochs: 1
+
+training:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  gradient_clip: 5.0
+  num_workers: 0

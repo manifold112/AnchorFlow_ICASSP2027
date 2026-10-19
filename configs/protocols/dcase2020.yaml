@@ -1,0 +1,6 @@
+name: DCASE 2020 Task 1A / TAU20
+scenes: [airport, bus, metro, metro_station, park, public_square, shopping_mall, street_pedestrian, street_traffic, tram]
+seen_devices: [A, B, C, S1, S2, S3]
+unseen_devices: [S4, S5, S6]
+segments_per_recording: 10
+user_disjoint: false

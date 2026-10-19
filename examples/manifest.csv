@@ -1,0 +1,4 @@
+feature_path,scene,device,recording_id,user_id
+features/airport_A_0001.npy,airport,A,airport_0001,
+features/park_B_0002.npy,park,B,park_0002,
+features/metro_S1_0003.npy,metro,S1,metro_0003,

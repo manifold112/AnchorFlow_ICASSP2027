@@ -1,0 +1,8 @@
+variant,seen,seen_sd,unseen,unseen_sd,overall,overall_sd
+Baseline,64.80,0.38,53.70,0.49,61.10,0.24
+Scene-agnostic,65.64,0.39,55.78,0.53,62.35,0.28
+Mean-only,65.94,0.44,56.64,0.59,62.84,0.30
+Endpoint,65.86,0.46,56.44,0.57,62.72,0.32
+Non-detached,63.55,0.32,51.95,0.46,59.68,0.27
+Matched isotropic,65.56,0.43,55.66,0.54,62.26,0.31
+AnchorFlow,66.32,0.35,57.62,0.58,63.42,0.28
