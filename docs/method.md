@@ -19,24 +19,24 @@ across scenes.*
 
 Each observed cell $(y,d)$ has a diagonal-Gaussian approximation:
 
-$$
-q_{y,d}=\mathcal{N}(\mu_{y,d},\operatorname{Diag}(\sigma_{y,d}^{\odot 2})).
-$$
+```math
+q_{y,d}=\mathcal{N}(\mu_{y,d},\mathrm{Diag}(\sigma_{y,d}^{\odot 2})).
+```
 
 Accumulate detached first and second raw moments over an effective optimizer
 update. For a nonempty cell, initialize its moments directly on first observation;
 otherwise update them using EMA decay $\beta$:
 
-$$
+```math
 m_{y,d}^{(r)}\leftarrow\beta m_{y,d}^{(r)}+
 (1-\beta)\frac{1}{c_{y,d}}\sum_{i\in I_{y,d}}
-\operatorname{sg}(h_i)^{\odot r},\quad r\in\{1,2\}.
-$$
+\mathrm{sg}(h_i)^{\odot r},\quad r\in\{1,2\}.
+```
 
-$$
+```math
 \mu=m^{(1)},\qquad
 \sigma=\sqrt{\max(m^{(2)}-\mu^{\odot 2},\nu_{\min})+\epsilon}.
-$$
+```
 
 The bank stores raw moments, rather than independently averaging minibatch
 variances. Counts accumulate across successful updates. A source anchor needs at
@@ -54,22 +54,22 @@ Sample a target uniformly from eligible devices in the same scene, excluding the
 source. Source and target recordings need not be paired. With source and target
 statistics $(\mu_s,\sigma_s)$ and $(\mu_t,\sigma_t)$, define:
 
-$$
-r_i=(\operatorname{sg}(h_i)-\mu_s)\oslash\sigma_s,
-$$
+```math
+r_i=(\mathrm{sg}(h_i)-\mu_s)\oslash\sigma_s,
+```
 
-$$
+```math
 \mu_\tau=(1-\tau)\mu_s+\tau\mu_t,\quad
 \sigma_\tau=(1-\tau)\sigma_s+\tau\sigma_t,\quad
 z_i(\tau)=\mu_\tau+\sigma_\tau\odot r_i.
-$$
+```
 
 These statistics follow the 2-Wasserstein geodesic between diagonal Gaussians.
 Each particle follows a linear path whose velocity is available explicitly:
 
-$$
+```math
 v_i=\mu_t-\mu_s+(\sigma_t-\sigma_s)\odot r_i.
-$$
+```
 
 The endpoint $z_i(0)$ equals the detached feature. The target endpoint retains the
 same standardized residual in the target anchor. No transport network or numerical
@@ -81,9 +81,9 @@ Implementation: [`DeviceFlow`](../src/anchorflow/flows.py).
 
 Evaluate the shared predictor deterministically on a path:
 
-$$
+```math
 \rho_i(\tau)=\ell_{\mathrm{CE}}(g_\phi^{\mathrm{aux}}(z_i(\tau)),y_i).
-$$
+```
 
 The continuous energy is $\mathbb{E}[\int_0^1(\rho_i'(\tau))^2d\tau]$.
 By Cauchy-Schwarz, this energy bounds the squared change in scene loss between
@@ -93,11 +93,11 @@ it does not require every class probability to remain identical.
 Draw $K$ same-scene targets per eligible sample, with replacement, and sample
 $\tau\sim\mathcal{U}(0,1-\delta)$. Estimate each directional loss slope with:
 
-$$
+```math
 \Delta_{ik}=\frac{\rho_i(\tau_{ik}+\delta)-\rho_i(\tau_{ik})}{\delta},\qquad
-\widehat{\mathcal E}_{\mathrm{AF}}=
+\widehat{\mathcal{E}}_{\mathrm{AF}}=
 \frac{1}{|B^+|K}\sum_{i\in B^+}\sum_{k=1}^K\Delta_{ik}^2.
-$$
+```
 
 The two evaluations share the residual, target device and auxiliary predictor
 state. The energy is zero when there are no eligible samples or during warm-up.
@@ -111,11 +111,11 @@ Implementation: [`AnchorFlow`](../src/anchorflow/regularizer.py).
 Features, anchors and path geometry are detached. The auxiliary predictor shares
 trainable parameters with the original head:
 
-$$
-\nabla_\theta\mathcal L=\nabla_\theta\mathcal L_{\mathrm{base}},\qquad
-\nabla_\phi\mathcal L=\nabla_\phi\mathcal L_{\mathrm{base}}+
-\lambda_{\mathrm{AF}}\nabla_\phi\widehat{\mathcal E}_{\mathrm{AF}}.
-$$
+```math
+\nabla_\theta\mathcal{L}=\nabla_\theta\mathcal{L}_{\mathrm{base}},\qquad
+\nabla_\phi\mathcal{L}=\nabla_\phi\mathcal{L}_{\mathrm{base}}+
+\lambda_{\mathrm{AF}}\nabla_\phi\widehat{\mathcal{E}}_{\mathrm{AF}}.
+```
 
 The auxiliary call uses evaluation mode to disable dropout and to freeze BatchNorm
 running statistics, while autograd remains enabled for predictor parameters,
